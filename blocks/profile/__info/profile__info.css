@@ -13,5 +13,6 @@
     gap: 7px 10px;
     margin: 26px 0 33px;
     justify-items: center;
+    transform: translateX(13px);
 }
 }

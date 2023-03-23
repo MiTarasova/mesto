@@ -1,14 +1,15 @@
-.card {
+.cards__item {
   max-width: 282px;
   min-height: 361px;
   background-color: #fff;
   border-radius: 10px;
   display: grid;
   grid-template-rows: 282px auto;
-  grid-template-columns: 210px auto;
+  grid-template-columns: 220px auto;
   grid-template-areas:
   "image image"
   "title like";
-  column-gap: 30px;
+  column-gap: 20px;
   align-items: center;
+  list-style: none;
 }

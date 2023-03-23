@@ -1,4 +1,4 @@
-.card__like-button {
+.cards__like-button {
   width: 22px;
   height: 19px;
   margin: 0 20px 0 0;
@@ -12,6 +12,7 @@
   justify-self: flex-end;
 }
 
-.card__like-button:hover {
+.cards__like-button:hover {
   opacity: 50%;
+  cursor: pointer;
 }

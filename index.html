@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto Russia</title>
-  <link href="./pages/index.css" rel="stylesheet"/>
+  <link href="./pages/index.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -18,63 +18,65 @@
       <section class="profile">
         <img class="profile__avatar" src="./images/avatar.JPG" alt="Фотография пользователя">
         <div class="profile__info">
-          <h1 class="profile__name">Милана Тарасова</h1>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button line-buttons" type="button"></button>
-          <p class="profile__bio">Art is to find unusual in ordinary</p>
+          <p class="profile__bio">Исследователь океана</p>
         </div>
         <button class="profile__add-button line-buttons" type="button"></button>
       </section>
       <section class="elements" aria-label="Галлерея">
-        <div class="card">
-          <img class="card__image" src="./images/Kolokolnaya.JPG" alt="Фото &laquo;Колокольная улица&raquo;">
-          <h2 class="card__title">Колокольная улица</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/Krasnaya-ploshad'.JPG" alt="Фото &laquo;Красная площадь&raquo;">
-          <h2 class="card__title">Весна в городе</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/Lahta.JPG" alt="Фото &laquo;Лахта&raquo;">
-          <h2 class="card__title">Кукуруза</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/ZSD.jpg" alt="Фото &laquo;Западный Скоростной Диаметр&raquo;">
-          <h2 class="card__title">Мосты соединяют</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/Murmansk.JPG" alt="Фото &laquo;Мурманск&raquo;">
-          <h2 class="card__title">Точка зрения</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/Moskva-city.JPG" alt="Фото &laquo;Москва-Сити&raquo;">
-          <h2 class="card__title">Москва-Сити</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
+        <ul class="cards">
+          <li class="cards__item">
+            <img class="cards__image" src="./images/Kolokolnaya.JPG" alt="Фото &laquo;Колокольная улица&raquo;">
+            <h2 class="cards__title">Колокольная улица</h2>
+            <button class="cards__like-button" type="button"></button>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/Krasnaya-ploshad'.JPG" alt="Фото &laquo;Красная площадь&raquo;">
+            <h2 class="cards__title">Весна в городе</h2>
+            <button class="cards__like-button" type="button"></button>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/Lahta.JPG" alt="Фото &laquo;Лахта&raquo;">
+            <h2 class="cards__title">Кукуруза</h2>
+            <button class="cards__like-button" type="button"></button>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/ZSD.jpg" alt="Фото &laquo;Западный Скоростной Диаметр&raquo;">
+            <h2 class="cards__title">Мосты соединяют</h2>
+            <button class="cards__like-button" type="button"></button>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/Murmansk.JPG" alt="Фото &laquo;Мурманск&raquo;">
+            <h2 class="cards__title">Точка зрения</h2>
+            <button class="cards__like-button" type="button"></button>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/Moskva-city.JPG" alt="Фото &laquo;Москва-Сити&raquo;">
+            <h2 class="cards__title">Москва-Сити</h2>
+            <button class="cards__like-button" type="button"></button>
+          </li>
+        </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
     <section class="popup">
-      <form class="popup__container">
-        <button class="popup__close-button line-buttons" type="reset"></button>
+      <div class="popup__container">
+        <button class="popup__close-button line-buttons" type="button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <fieldset class="popup__item">
-          <input class="popup__field popup__field_el_name-area" type="text" value="" name="name" placeholder="Имя"
+        <form class="popup__item" name="edit-profile">
+          <input class="popup__field popup__field_el_name-area" type="text" name="input-name" placeholder="Имя"
             required>
-          <input class="popup__field popup__field_el_about-area" type="text" value="" name="about" placeholder="О себе"
+          <input class="popup__field popup__field_el_about-area" type="text" name="input-about" placeholder="О себе"
             required>
-        </fieldset>
-        <button class="popup__submit-button" type="submit">Сохранить</button>
-      </form>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
     </section>
   </div>
-  <script src="./script/script.js"></script>
+  <script src="./scripts/script.js"></script>
 </body>
 
 </html>
