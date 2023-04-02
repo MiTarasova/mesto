@@ -18,55 +18,25 @@
       <section class="profile">
         <img class="profile__avatar" src="./images/avatar.JPG" alt="Фотография пользователя">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit-button line-buttons" type="button"></button>
-          <p class="profile__bio">Исследователь океана</p>
+          <h1 class="profile__name">Милана</h1>
+          <button class="profile__edit-button service-buttons" type="button"></button>
+          <p class="profile__bio">Art is to find unusual in ordinary &#128248;</p>
         </div>
-        <button class="profile__add-button line-buttons" type="button"></button>
+        <button class="profile__add-button service-buttons" type="button"></button>
       </section>
       <section class="elements" aria-label="Галлерея">
         <ul class="cards">
-          <li class="cards__item">
-            <img class="cards__image" src="./images/Kolokolnaya.JPG" alt="Фото &laquo;Колокольная улица&raquo;">
-            <h2 class="cards__title">Колокольная улица</h2>
-            <button class="cards__like-button" type="button"></button>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/Krasnaya-ploshad'.JPG" alt="Фото &laquo;Красная площадь&raquo;">
-            <h2 class="cards__title">Весна в городе</h2>
-            <button class="cards__like-button" type="button"></button>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/Lahta.JPG" alt="Фото &laquo;Лахта&raquo;">
-            <h2 class="cards__title">Кукуруза</h2>
-            <button class="cards__like-button" type="button"></button>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/ZSD.jpg" alt="Фото &laquo;Западный Скоростной Диаметр&raquo;">
-            <h2 class="cards__title">Мосты соединяют</h2>
-            <button class="cards__like-button" type="button"></button>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/Murmansk.JPG" alt="Фото &laquo;Мурманск&raquo;">
-            <h2 class="cards__title">Точка зрения</h2>
-            <button class="cards__like-button" type="button"></button>
-          </li>
-          <li class="cards__item">
-            <img class="cards__image" src="./images/Moskva-city.JPG" alt="Фото &laquo;Москва-Сити&raquo;">
-            <h2 class="cards__title">Москва-Сити</h2>
-            <button class="cards__like-button" type="button"></button>
-          </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup popup_var_edit">
       <div class="popup__container">
-        <button class="popup__close-button line-buttons" type="button"></button>
+        <button class="popup__close-button popup__close-button_var_edit service-buttons" type="button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__item" name="edit-profile">
+        <form class="popup__item popup__item_var_edit" name="edit-profile">
           <input class="popup__field popup__field_el_name-area" type="text" name="input-name" placeholder="Имя"
             required>
           <input class="popup__field popup__field_el_about-area" type="text" name="input-about" placeholder="О себе"
@@ -75,6 +45,35 @@
         </form>
       </div>
     </section>
+    <section class="popup popup_var_add">
+      <div class="popup__container">
+        <button class="popup__close-button popup__close-button_var_add service-buttons" type="button"></button>
+        <h2 class="popup__heading">Новое место</h2>
+        <form class="popup__item popup__item_var_add" name="edit-profile">
+          <input class="popup__field popup__field_el_title-area" type="text" name="input-name" placeholder="Название"
+            required>
+          <input class="popup__field popup__field_el_link-area" type="text" name="input-about"
+            placeholder="Ссылка на картинку" required>
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+    <section class="popup popup_var_pictures"></section>
+    <template class="cards__template">
+      <li class="cards__item">
+        <img class="cards__image">
+        <h2 class="cards__title"></h2>
+        <button class="cards__like-button" type="button"></button>
+        <button class="cards__reset-button service-buttons" type="button"></button>
+      </li>
+    </template>
+    <template class="popup__template">
+      <div class="popup__container popup__container_var_pictures">
+        <button class="popup__close-button popup__close-button_var_pictures service-buttons" type="button"></button>
+        <img class="popup__image">
+        <p class="popup__subscribe"></p>
+      </div>
+    </template>
   </div>
   <script src="./scripts/script.js"></script>
 </body>

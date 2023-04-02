@@ -7,3 +7,7 @@
   border-top-right-radius: 10px;
   grid-area: image;
 }
+
+.cards__image:hover {
+  cursor: pointer;
+}
