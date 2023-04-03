@@ -40,5 +40,7 @@
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
 @import url(../blocks/popup/__subscribe/popup__subscribe.css);
+@import url(../blocks/popup/__image/popup__image.css);
+
 
 @import url(../blocks/service-buttons/service-buttons.css);

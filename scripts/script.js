@@ -2,8 +2,6 @@
 // Попапы
 const popupEditEl = document.querySelector('.popup_var_edit');
 const popupAddEl = document.querySelector('.popup_var_add');
-
-const popupTemplate = document.querySelector('.popup__template').content;
 const popupPictureEl = document.querySelector('.popup_var_pictures');
 
 // Кнопки открытия попапов
@@ -13,6 +11,7 @@ const popupAddOpenButtonEl = document.querySelector('.profile__add-button');
 // Кнопки закрытия попапов
 const popupEditCloseButtonEl = document.querySelector('.popup__close-button_var_edit');
 const popupAddCloseButtonEl = document.querySelector('.popup__close-button_var_add');
+const popupPicCloseButtonEl = popupPictureEl.querySelector('.popup__close-button_var_pictures');
 
 // Inputs
 const nameInput = document.querySelector('.popup__field_el_name-area');
@@ -34,32 +33,32 @@ const cardTemplate = document.querySelector('.cards__template').content;
 const cardsItemElement = cardTemplate.querySelector('.cards__item');
 const initialCards = [
   {
-    name: 'Колокольная',
-    link: 'https://4.downloader.disk.yandex.ru/preview/156ed56c006ac14f8b8f64f2191b59c460f0861ce7ca860a7350cdad50d16ede/inf/1Z-ywmiySuBw55olUa_gAOoBuJvoae-Z1uiVIiNF7nIt5PJQfU7WkkZc5ZEtv07OqCKsIAgv_0OrshwoZEbT5g%3D%3D?uid=1717244569&filename=Kolokolnaya.JPG&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1717244569&tknv=v2&size=3970x2102'
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
-    name: 'Весна в городе',
-    link: 'https://3.downloader.disk.yandex.ru/preview/af1b10a7b885c1a4892195df0f97bba1f7fe70345df6cba8ee401befd2b6d9a8/inf/2mZvDnefVdbQPok6I5Ci9OoBuJvoae-Z1uiVIiNF7nJbH73wNPYadm4OLwbiRwexMh3q2oEF5QEy-7jNRWaakw%3D%3D?uid=1717244569&filename=Krasnaya-ploshad%27.JPG&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1717244569&tknv=v2&size=3970x2102'
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    name: 'Кукуруза',
-    link: 'https://4.downloader.disk.yandex.ru/preview/87cfa1c86c57a0e81324aaefea3d1f4eddfcea67ad32801fb186ed71d8340f26/inf/7giTsrW-EZn1PH1PtCfaZuoBuJvoae-Z1uiVIiNF7nJBd8q7UKXgcVxfSGTE7OhSp7cwrVaRT_caAmXXS5560A%3D%3D?uid=1717244569&filename=Lahta.JPG&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1717244569&tknv=v2&size=3970x2102'
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
-    name: 'Мосты соединяют',
-    link: 'https://3.downloader.disk.yandex.ru/preview/70babeeaec011955a35c27c2ac667d5fa233a6c260e36f1c582af2a7afc48bb7/inf/ttaExPr27nU8LoKCecDzy-oBuJvoae-Z1uiVIiNF7nIt5cop8qw1nY3cKaC3nkicicFszezRkkm8NiCnrojGew%3D%3D?uid=1717244569&filename=ZSD.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1717244569&tknv=v2&size=3970x2102'
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
-    name: 'Точка зрения',
-    link: 'https://3.downloader.disk.yandex.ru/preview/122130fd1991c3b0b4e0a132e512a93c56bd0c5f3847e3999e4b2503c5d79403/inf/dnGZeIlukOlB_LpBWc6RnOoBuJvoae-Z1uiVIiNF7nKdWXP9HcoBVVfduIUEtZZFZt9iN3P0IOyrX58sUfSmOw%3D%3D?uid=1717244569&filename=Murmansk.JPG&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1717244569&tknv=v2&size=3970x2102'
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
-    name: 'Москва-Сити',
-    link: 'https://1.downloader.disk.yandex.ru/preview/7427cfa5bb571dde487f2f8a384e1dc71783e8723d23adeaf8e052a1aeff3170/inf/QvgMi2NBo7POc3n9aS2_RuoBuJvoae-Z1uiVIiNF7nKRbav6eWS95K3APa03AxgFw3-flT-soZcNHP1xAW441A%3D%3D?uid=1717244569&filename=Moskva-city.JPG&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1717244569&tknv=v2&size=3970x2102'
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
-// Функция открытия попапа (добавление класса)
+// Функция открытия/закрытия попапов (добавление/удаление класса)
 const togglePopup = function (popup) {
   popup.classList.toggle('popup_opened');
 }
@@ -67,13 +66,12 @@ const togglePopup = function (popup) {
 // Открытие попапа "Редактирование профиля" по клику на edit
 popupEditOpenButtonEl.addEventListener('click', function () {
   togglePopup(popupEditEl);
-  // Подстановка значения "Имя" из профиля
+  // Подстановка значений из профиля
   nameInput.value = profileNameEl.textContent;
-  // Подстановка значения "О себе" из профиля
   aboutInput.value = profileAboutEl.textContent;
 });
 
-// Закрытие Edit-попапа (удаления класса)
+// Закрытие Edit-попапа
 popupEditCloseButtonEl.addEventListener('click', function () {
   togglePopup(popupEditEl);
 });
@@ -83,22 +81,19 @@ popupAddOpenButtonEl.addEventListener('click', function () {
   togglePopup(popupAddEl);
 });
 
-// Закрытие Add-попапа (удаления класса)
+// Закрытие Add-попапа
 popupAddCloseButtonEl.addEventListener('click', function () {
   togglePopup(popupAddEl);
 });
 
 // Обработчик «отправки» формы Edit-попапа
 function handleFormSubmit(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault(); // Отмена стандартной отправки формы
 
-  // Изменение "Имя" профиля
+  // Изменение параметров профиля
   profileNameEl.textContent = nameInput.value;
-
-  // Изменение "О себе" профиля
   profileAboutEl.textContent = aboutInput.value;
 
-  // Вызов функции закрытия попапа
   togglePopup(popupEditEl);
 }
 
@@ -108,7 +103,7 @@ formEditEl.addEventListener('submit', handleFormSubmit);
 // Предустановленные карточки
 initialCards.forEach(card => { createCard(card.name, card.link); });
 
-// Создание карточки
+// Функция создания карточки
 function createCard(picTitleValue, picLinkValue) {
   // Клонирование всего содержимого li
   const cardElement = cardsItemElement.cloneNode(true);
@@ -123,7 +118,6 @@ function createCard(picTitleValue, picLinkValue) {
 
   // Функция активного "лайка" (добавление)
   cardElement.querySelector('.cards__like-button').addEventListener('click', function (evt) {
-    // Добавление и удаление селектора активности "лайка"
     evt.target.classList.toggle('cards__like-button_active');
   });
 
@@ -135,31 +129,26 @@ function createCard(picTitleValue, picLinkValue) {
   // Функция открытия попапа с изображением
   cardElement.querySelector('.cards__image').addEventListener('click', function () {
     togglePopup(popupPictureEl);
-    createPicturePopup(picTitleValue, picLinkValue)
+    createPicturePopup(picLinkValue, picTitleValue)
   });
 };
 
-  // Создание попапа с изображением
-function createPicturePopup(picSubscribeValue, pickImageValue) {
-  // Клонирование всего содержимого div
-  const pictureElement = popupTemplate.querySelector('.popup__container_var_pictures').cloneNode(true);
+// Функция создания попапа с изображением
+function createPicturePopup(image, subscribe) {
+  const popupPicContainer = document.querySelector('.popup__container_var_pictures');
 
-  // Подставление передаваемых значений
-  pictureElement.querySelector('.popup__subscribe').textContent = picSubscribeValue;
-  pictureElement.querySelector('.popup__image').src = pickImageValue;
-
-  // Подстановка карточки в контейнер ul
-  popupPictureEl.append(pictureElement);
+  popupPicContainer.querySelector('.popup__image').src = image;
+  popupPicContainer.querySelector('.popup__subscribe').textContent = subscribe;
 }
 
-const picpic = document.querySelector('.popup__close-button_var_pictures')
-picpic.addEventListener('click', function () {
+// Закрытие Picture-попапа
+popupPicCloseButtonEl.addEventListener('click', function () {
   togglePopup(popupPictureEl);
 });
 
 // Обработчик "отправки" формы Add-попапа
 formAddEl.addEventListener('submit', function (evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault();
 
   const picTitle = document.querySelector('.popup__field_el_title-area');
   const picLink = document.querySelector('.popup__field_el_link-area');
@@ -170,6 +159,5 @@ formAddEl.addEventListener('submit', function (evt) {
   picTitle.value = '';
   picLink.value = '';
 
-  // Закрытие попапа
   togglePopup(popupAddEl);
 });

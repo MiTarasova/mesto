@@ -49,7 +49,7 @@
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_var_add service-buttons" type="button"></button>
         <h2 class="popup__heading">Новое место</h2>
-        <form class="popup__item popup__item_var_add" name="edit-profile">
+        <form class="popup__item popup__item_var_add" name="add-pictures">
           <input class="popup__field popup__field_el_title-area" type="text" name="input-name" placeholder="Название"
             required>
           <input class="popup__field popup__field_el_link-area" type="text" name="input-about"
@@ -58,7 +58,13 @@
         </form>
       </div>
     </section>
-    <section class="popup popup_var_pictures"></section>
+    <section class="popup popup_var_pictures">
+      <div class="popup__container popup__container_var_pictures">
+        <button class="popup__close-button popup__close-button_var_pictures service-buttons" type="button"></button>
+        <img class="popup__image">
+        <p class="popup__subscribe"></p>
+      </div>
+    </section>
     <template class="cards__template">
       <li class="cards__item">
         <img class="cards__image">
@@ -66,13 +72,6 @@
         <button class="cards__like-button" type="button"></button>
         <button class="cards__reset-button service-buttons" type="button"></button>
       </li>
-    </template>
-    <template class="popup__template">
-      <div class="popup__container popup__container_var_pictures">
-        <button class="popup__close-button popup__close-button_var_pictures service-buttons" type="button"></button>
-        <img class="popup__image">
-        <p class="popup__subscribe"></p>
-      </div>
     </template>
   </div>
   <script src="./scripts/script.js"></script>
