@@ -32,7 +32,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <section class="popup popup_var_edit">
+    <div class="popup popup_var_edit">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_var_edit service-buttons" type="button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
@@ -44,8 +44,8 @@
           <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
-    </section>
-    <section class="popup popup_var_add">
+    </div>
+    <div class="popup popup_var_add">
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_var_add service-buttons" type="button"></button>
         <h2 class="popup__heading">Новое место</h2>
@@ -57,14 +57,14 @@
           <button class="popup__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
-    </section>
-    <section class="popup popup_var_pictures" aria-label="Просмотр изображения">
-        <figure class="popup__container popup__container_var_pictures">
-          <button class="popup__close-button popup__close-button_var_pictures service-buttons" type="button"></button>
-          <img class="popup__image" src="#" alt="#">
-          <figcaption class="popup__subscribe"></figcaption>
-        </figure>
-    </section>
+    </div>
+    <div class="popup popup_var_pictures" aria-label="Просмотр изображения">
+      <figure class="popup__container popup__container_var_pictures">
+        <button class="popup__close-button popup__close-button_var_pictures service-buttons" type="button"></button>
+        <img class="popup__image" src="#" alt="#">
+        <figcaption class="popup__subscribe"></figcaption>
+      </figure>
+    </div>
     <template class="cards__template">
       <li class="cards__item">
         <img class="cards__image" src="#" alt="#">

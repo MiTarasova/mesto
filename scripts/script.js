@@ -27,10 +27,12 @@ const formAddEl = document.querySelector('.popup__item_var_add');
 const profileNameEl = document.querySelector('.profile__name');
 const profileAboutEl = document.querySelector('.profile__bio');
 
+// Контейнер попапа с изображением
+const popupPicContainer = document.querySelector('.popup__container_var_pictures');
+
 // Карточки
 const cardsContainer = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.cards__template').content;
-const cardsItemElement = cardTemplate.querySelector('.cards__item');
 const initialCards = [
   {
     name: 'Колокольная',
@@ -58,14 +60,19 @@ const initialCards = [
   }
 ];
 
-// Функция открытия/закрытия попапов (добавление/удаление класса)
-const togglePopup = function (popup) {
-  popup.classList.toggle('popup_opened');
+// Функция открытия попапов (добавление класса)
+const openPopup = function (popup) {
+  popup.classList.add('popup_opened');
+}
+
+// Функция закрытия попапов (удаление класса)
+const closePopup = function (popup) {
+  popup.classList.remove('popup_opened');
 }
 
 // Открытие попапа "Редактирование профиля" по клику на edit
 popupEditOpenButtonEl.addEventListener('click', function () {
-  togglePopup(popupEditEl);
+  openPopup(popupEditEl);
   // Подстановка значений из профиля
   nameInput.value = profileNameEl.textContent;
   aboutInput.value = profileAboutEl.textContent;
@@ -73,49 +80,43 @@ popupEditOpenButtonEl.addEventListener('click', function () {
 
 // Закрытие Edit-попапа
 popupEditCloseButtonEl.addEventListener('click', function () {
-  togglePopup(popupEditEl);
+  closePopup(popupEditEl);
 });
 
 // Открытие попапа "Добавление фото" по клику на add
 popupAddOpenButtonEl.addEventListener('click', function () {
-  togglePopup(popupAddEl);
+  openPopup(popupAddEl);
 
 });
 
 // Закрытие Add-попапа
 popupAddCloseButtonEl.addEventListener('click', function () {
-  togglePopup(popupAddEl);
+  closePopup(popupAddEl);
 });
 
 // Обработчик «отправки» формы Edit-попапа
-function handleFormSubmit(evt) {
+function handleEditFormSubmit(evt) {
   evt.preventDefault(); // Отмена стандартной отправки формы
 
   // Изменение параметров профиля
   profileNameEl.textContent = nameInput.value;
   profileAboutEl.textContent = aboutInput.value;
 
-  togglePopup(popupEditEl);
+  closePopup(popupEditEl);
 }
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
-formEditEl.addEventListener('submit', handleFormSubmit);
-
-// Предустановленные карточки
-initialCards.forEach(card => { createCard(card.name, card.link); });
+formEditEl.addEventListener('submit', handleEditFormSubmit);
 
 // Функция создания карточки
 function createCard(picTitleValue, picLinkValue) {
   // Клонирование всего содержимого li
-  const cardElement = cardsItemElement.cloneNode(true);
+  const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
 
   // Подставление передаваемых значений
   cardElement.querySelector('.cards__title').textContent = picTitleValue;
   cardElement.querySelector('.cards__image').src = picLinkValue;
   cardElement.querySelector('.cards__image').alt = picTitleValue;
-
-  // Подстановка карточки в контейнер ul
-  cardsContainer.append(cardElement);
 
   // Функция активного "лайка" (добавление)
   cardElement.querySelector('.cards__like-button').addEventListener('click', function (evt) {
@@ -129,15 +130,20 @@ function createCard(picTitleValue, picLinkValue) {
 
   // Функция открытия попапа с изображением
   cardElement.querySelector('.cards__image').addEventListener('click', function () {
-    togglePopup(popupPictureEl);
-    createPicturePopup(picLinkValue, picTitleValue)
+    openPopup(popupPictureEl);
+    createPicturePopup(picLinkValue, picTitleValue);
   });
+
+  return cardElement;
 };
+
+// Предустановленные карточки
+initialCards.forEach(card => {
+  cardsContainer.prepend(createCard(card.name, card.link));
+});
 
 // Функция создания попапа с изображением
 function createPicturePopup(image, subscribe) {
-  const popupPicContainer = document.querySelector('.popup__container_var_pictures');
-
   popupPicContainer.querySelector('.popup__image').src = image;
   popupPicContainer.querySelector('.popup__image').alt = subscribe;
   popupPicContainer.querySelector('.popup__subscribe').textContent = subscribe;
@@ -145,7 +151,7 @@ function createPicturePopup(image, subscribe) {
 
 // Закрытие Picture-попапа
 popupPicCloseButtonEl.addEventListener('click', function () {
-  togglePopup(popupPictureEl);
+  closePopup(popupPictureEl);
 });
 
 // Обработчик "отправки" формы Add-попапа
@@ -156,10 +162,10 @@ formAddEl.addEventListener('submit', function (evt) {
   const picLink = document.querySelector('.popup__field_el_link-area');
 
   // Вызов функции с передачей параметров значений
-  createCard(picTitle.value, picLink.value);
+  cardsContainer.prepend(createCard(picTitle.value, picLink.value));
 
   picTitle.value = '';
   picLink.value = '';
 
-  togglePopup(popupAddEl);
+  closePopup(popupAddEl);
 });
