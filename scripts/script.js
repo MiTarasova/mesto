@@ -33,28 +33,28 @@ const cardTemplate = document.querySelector('.cards__template').content;
 const cardsItemElement = cardTemplate.querySelector('.cards__item');
 const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Колокольная',
+    link: 'https://live.staticflickr.com/65535/52787095156_5304f0fe01_k.jpg'
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    name: 'Весна в городе',
+    link: 'https://live.staticflickr.com/65535/52787492130_7b662fa8f1_k.jpg'
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Кукуруза',
+    link: 'https://live.staticflickr.com/65535/52787325274_b6c377601d_k.jpg'
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: 'Мосты соединяют',
+    link: 'https://live.staticflickr.com/65535/52787325344_b3efc68fc6_h.jpg'
   },
   {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    name: 'Точка зрения',
+    link: 'https://live.staticflickr.com/65535/52787546168_a06b6c5d88_k.jpg'
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    name: 'Москва-Сити',
+    link: 'https://live.staticflickr.com/65535/52787325264_29b3bf9e43_k.jpg'
   }
 ];
 
@@ -79,6 +79,7 @@ popupEditCloseButtonEl.addEventListener('click', function () {
 // Открытие попапа "Добавление фото" по клику на add
 popupAddOpenButtonEl.addEventListener('click', function () {
   togglePopup(popupAddEl);
+
 });
 
 // Закрытие Add-попапа
@@ -138,6 +139,7 @@ function createPicturePopup(image, subscribe) {
   const popupPicContainer = document.querySelector('.popup__container_var_pictures');
 
   popupPicContainer.querySelector('.popup__image').src = image;
+  popupPicContainer.querySelector('.popup__image').alt = subscribe;
   popupPicContainer.querySelector('.popup__subscribe').textContent = subscribe;
 }
 
