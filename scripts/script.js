@@ -29,6 +29,8 @@ const profileAboutEl = document.querySelector('.profile__bio');
 
 // Контейнер попапа с изображением
 const popupPicContainer = document.querySelector('.popup__container_var_pictures');
+const popupImageEl = popupPicContainer.querySelector('.popup__image');
+const popupSubscribeEl = popupPicContainer.querySelector('.popup__subscribe');
 
 // Карточки
 const cardsContainer = document.querySelector('.cards');
@@ -144,9 +146,9 @@ initialCards.forEach(card => {
 
 // Функция создания попапа с изображением
 function createPicturePopup(image, subscribe) {
-  popupPicContainer.querySelector('.popup__image').src = image;
-  popupPicContainer.querySelector('.popup__image').alt = subscribe;
-  popupPicContainer.querySelector('.popup__subscribe').textContent = subscribe;
+  popupImageEl.src = image;
+  popupImageEl.alt = subscribe;
+  popupSubscribeEl.textContent = subscribe;
 }
 
 // Закрытие Picture-попапа
@@ -158,14 +160,11 @@ popupPicCloseButtonEl.addEventListener('click', function () {
 formAddEl.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
-  const picTitle = document.querySelector('.popup__field_el_title-area');
-  const picLink = document.querySelector('.popup__field_el_link-area');
-
   // Вызов функции с передачей параметров значений
-  cardsContainer.prepend(createCard(picTitle.value, picLink.value));
+  cardsContainer.prepend(createCard(titleInput.value, linkInput.value));
 
-  picTitle.value = '';
-  picLink.value = '';
+  titleInput.value = '';
+  linkInput.value = '';
 
   closePopup(popupAddEl);
 });
