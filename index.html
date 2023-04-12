@@ -36,12 +36,14 @@
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_var_edit service-buttons" type="button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
-        <form class="popup__item popup__item_var_edit" name="edit-profile">
-          <input class="popup__field popup__field_el_name-area" type="text" name="input-name" placeholder="Имя"
-            required>
-          <input class="popup__field popup__field_el_about-area" type="text" name="input-about" placeholder="О себе"
-            required>
-          <button class="popup__submit-button" type="submit">Сохранить</button>
+        <form class="popup__item popup__item_var_edit" name="edit-profile" novalidate>
+          <input class="popup__field popup__field_el_name-area popup__field_type_error" id="name-input" type="text"
+            name="input-name" placeholder="Имя" minlength="2" maxlength="40" required>
+          <span class="popup__error popup__error_visible" id="name-input-error"></span>
+          <input class="popup__field popup__field_el_about-area popup__field_type_error" id="about-input" type="text"
+            name="input-about" placeholder="О себе" minlength="2" maxlength="200" required>
+          <span class="popup__error popup__error_visible" id="about-input-error"></span>
+          <button class="popup__submit-button popup__submit-button_valid" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -49,16 +51,18 @@
       <div class="popup__container">
         <button class="popup__close-button popup__close-button_var_add service-buttons" type="button"></button>
         <h2 class="popup__heading">Новое место</h2>
-        <form class="popup__item popup__item_var_add" name="add-pictures">
-          <input class="popup__field popup__field_el_title-area" type="text" name="input-name" placeholder="Название"
-            required>
-          <input class="popup__field popup__field_el_link-area" type="text" name="input-about"
-            placeholder="Ссылка на картинку" required>
-          <button class="popup__submit-button" type="submit">Сохранить</button>
+        <form class="popup__item popup__item_var_add" name="add-pictures" novalidate>
+          <input class="popup__field popup__field_el_title-area popup__field_type_error" id="title-input" type="text"
+            name="input-name" placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="popup__error popup__error_visible" id="title-input-error"></span>
+          <input class="popup__field popup__field_el_link-area popup__field_type_error" id="link-input" type="url"
+            name="input-about" placeholder="Ссылка на картинку" required>
+          <span class="popup__error popup__error_visible" id="link-input-error"></span>
+          <button class="popup__submit-button popup__submit-button_valid" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
-    <div class="popup popup_var_pictures" aria-label="Просмотр изображения">
+    <div class="popup popup_var_pictures">
       <figure class="popup__container popup__container_var_pictures">
         <button class="popup__close-button popup__close-button_var_pictures service-buttons" type="button"></button>
         <img class="popup__image" src="#" alt="#">
@@ -74,6 +78,8 @@
       </li>
     </template>
   </div>
+  <script src="./scripts/constants.js"></script>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/script.js"></script>
 </body>
 

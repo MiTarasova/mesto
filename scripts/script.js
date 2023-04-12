@@ -1,75 +1,23 @@
-// Обявление переменных
-// Попапы
-const popupEditEl = document.querySelector('.popup_var_edit');
-const popupAddEl = document.querySelector('.popup_var_add');
-const popupPictureEl = document.querySelector('.popup_var_pictures');
-
-// Кнопки открытия попапов
-const popupEditOpenButtonEl = document.querySelector('.profile__edit-button');
-const popupAddOpenButtonEl = document.querySelector('.profile__add-button');
-
-// Кнопки закрытия попапов
-const popupEditCloseButtonEl = document.querySelector('.popup__close-button_var_edit');
-const popupAddCloseButtonEl = document.querySelector('.popup__close-button_var_add');
-const popupPicCloseButtonEl = popupPictureEl.querySelector('.popup__close-button_var_pictures');
-
-// Inputs
-const nameInput = document.querySelector('.popup__field_el_name-area');
-const aboutInput = document.querySelector('.popup__field_el_about-area');
-const titleInput = document.querySelector('.popup__field_el_title-area');
-const linkInput = document.querySelector('.popup__field_el_link-area');
-
-// Формы попапов
-const formEditEl = popupEditEl.querySelector('.popup__item_var_edit');
-const formAddEl = document.querySelector('.popup__item_var_add');
-
-// Профиль инфо
-const profileNameEl = document.querySelector('.profile__name');
-const profileAboutEl = document.querySelector('.profile__bio');
-
-// Контейнер попапа с изображением
-const popupPicContainer = document.querySelector('.popup__container_var_pictures');
-const popupImageEl = popupPicContainer.querySelector('.popup__image');
-const popupSubscribeEl = popupPicContainer.querySelector('.popup__subscribe');
-
-// Карточки
-const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('.cards__template').content;
-const initialCards = [
-  {
-    name: 'Колокольная',
-    link: 'https://live.staticflickr.com/65535/52787095156_5304f0fe01_k.jpg'
-  },
-  {
-    name: 'Весна в городе',
-    link: 'https://live.staticflickr.com/65535/52787492130_7b662fa8f1_k.jpg'
-  },
-  {
-    name: 'Кукуруза',
-    link: 'https://live.staticflickr.com/65535/52787325274_b6c377601d_k.jpg'
-  },
-  {
-    name: 'Мосты соединяют',
-    link: 'https://live.staticflickr.com/65535/52787325344_b3efc68fc6_h.jpg'
-  },
-  {
-    name: 'Точка зрения',
-    link: 'https://live.staticflickr.com/65535/52787546168_a06b6c5d88_k.jpg'
-  },
-  {
-    name: 'Москва-Сити',
-    link: 'https://live.staticflickr.com/65535/52787325264_29b3bf9e43_k.jpg'
-  }
-];
-
 // Функция открытия попапов (добавление класса)
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', keyHandler);
 }
 
 // Функция закрытия попапов (удаление класса)
 const closePopup = function (popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', keyHandler)
+}
+
+// Функция закрытия попапов при клике на Escape
+function keyHandler(evt) {
+  popupList.forEach(element => {
+    const popup = element.closest('.popup');
+    if (evt.key === 'Escape') {
+      closePopup(popup);
+    };
+  });
 }
 
 // Открытие попапа "Редактирование профиля" по клику на edit
@@ -80,20 +28,9 @@ popupEditOpenButtonEl.addEventListener('click', function () {
   aboutInput.value = profileAboutEl.textContent;
 });
 
-// Закрытие Edit-попапа
-popupEditCloseButtonEl.addEventListener('click', function () {
-  closePopup(popupEditEl);
-});
-
 // Открытие попапа "Добавление фото" по клику на add
 popupAddOpenButtonEl.addEventListener('click', function () {
   openPopup(popupAddEl);
-
-});
-
-// Закрытие Add-попапа
-popupAddCloseButtonEl.addEventListener('click', function () {
-  closePopup(popupAddEl);
 });
 
 // Обработчик «отправки» формы Edit-попапа
@@ -109,6 +46,19 @@ function handleEditFormSubmit(evt) {
 
 // Прикрепляем обработчик к форме: он будет следить за событием “submit” - «отправка»
 formEditEl.addEventListener('submit', handleEditFormSubmit);
+
+// Обработчик "отправки" формы Add-попапа
+formAddEl.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+
+  // Вызов функции с передачей параметров значений
+  cardsContainer.prepend(createCard(titleInput.value, linkInput.value));
+
+  titleInput.value = '';
+  linkInput.value = '';
+
+  closePopup(popupAddEl);
+});
 
 // Функция создания карточки
 function createCard(picTitleValue, picLinkValue) {
@@ -151,20 +101,22 @@ function createPicturePopup(image, subscribe) {
   popupSubscribeEl.textContent = subscribe;
 }
 
-// Закрытие Picture-попапа
-popupPicCloseButtonEl.addEventListener('click', function () {
-  closePopup(popupPictureEl);
-});
+// Функция закрытия попапов по клику на крестик
+closeButtonsList.forEach(button => {
+  // определяем ближайший попап к элементу кнопки
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+})
 
-// Обработчик "отправки" формы Add-попапа
-formAddEl.addEventListener('submit', function (evt) {
-  evt.preventDefault();
+// Функция закрытия попапов по клику на оверлей
+function closePopupByOverlay(evt) {
+  // условие выполняется, если эл-т, который вызвал событие равен эл-ту, на который применен обработчик
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.currentTarget);
+  };
+};
 
-  // Вызов функции с передачей параметров значений
-  cardsContainer.prepend(createCard(titleInput.value, linkInput.value));
-
-  titleInput.value = '';
-  linkInput.value = '';
-
-  closePopup(popupAddEl);
+// Обработчик закрытия попапа при клике на overlay для каждого попапа
+popupList.forEach(element => {
+  element.addEventListener('click', closePopupByOverlay)
 });
