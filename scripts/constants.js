@@ -31,8 +31,8 @@ const profileNameEl = document.querySelector('.profile__name');
 const profileAboutEl = document.querySelector('.profile__bio');
 
 // Submit-кнопки попапов
-const popupAddButtonEl = document.querySelector('.popup_submit-button_var_add')
-const popupEditButtonEl = document.querySelector('.popup_submit-button_var_edit')
+const popupAddButtonEl = document.querySelector('.popup__submit-button_var_add')
+const popupEditButtonEl = document.querySelector('.popup__submit-button_var_edit')
 
 // Контейнер попапа с изображением
 const popupPicContainer = document.querySelector('.popup__container_var_pictures');
