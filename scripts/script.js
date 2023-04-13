@@ -12,17 +12,16 @@ const closePopup = function (popup) {
 
 // Функция закрытия попапов при клике на Escape
 function keyHandler(evt) {
-  popupList.forEach(element => {
-    const popup = element.closest('.popup');
+  const popup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
       closePopup(popup);
     };
-  });
-}
+};
 
 // Открытие попапа "Редактирование профиля" по клику на edit
 popupEditOpenButtonEl.addEventListener('click', function () {
   openPopup(popupEditEl);
+  disableButton(popupEditButtonEl, validationConfig)
   // Подстановка значений из профиля
   nameInput.value = profileNameEl.textContent;
   aboutInput.value = profileAboutEl.textContent;
@@ -31,6 +30,7 @@ popupEditOpenButtonEl.addEventListener('click', function () {
 // Открытие попапа "Добавление фото" по клику на add
 popupAddOpenButtonEl.addEventListener('click', function () {
   openPopup(popupAddEl);
+  disableButton(popupAddButtonEl, validationConfig);
 });
 
 // Обработчик «отправки» формы Edit-попапа
@@ -54,8 +54,7 @@ formAddEl.addEventListener('submit', function (evt) {
   // Вызов функции с передачей параметров значений
   cardsContainer.prepend(createCard(titleInput.value, linkInput.value));
 
-  titleInput.value = '';
-  linkInput.value = '';
+  formAddEl.reset()   // Очистка значений инпутов формы
 
   closePopup(popupAddEl);
 });

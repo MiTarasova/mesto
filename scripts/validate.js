@@ -20,7 +20,7 @@ const enableValidation = ({ formSelector, ...rest }) => { // В объекте �
   })
 }
 
-const setEventListeners = (formToValidate, { inputSelector, submitButtonSelector, ...rest }) => { // В объекте останутся ключи за исключением уже извлеченных (formSelector, inputSelector, submitButtonSelector)
+const setEventListeners = (formToValidate, { inputSelector, submitButtonSelector, inputErrorClass, ...rest }) => { // В объекте останутся ключи за исключением уже извлеченных (formSelector, inputSelector, submitButtonSelector)
   const formInputs = Array.from(formToValidate.querySelectorAll(inputSelector)); // Массив инпутов формы (найти все формы, используя inputSelector)
   const formButton = formToValidate.querySelector(submitButtonSelector);
 
@@ -31,8 +31,10 @@ const setEventListeners = (formToValidate, { inputSelector, submitButtonSelector
       checkInputValidity(input);
       if (hasInvalidInput(formInputs)) { // Если есть невалидное поле, деактивровать кнопку
         disableButton(formButton, rest)
+        input.classList.add(inputErrorClass);
       } else {
         enableButton(formButton, rest) // Если все ок, сделать активной
+        input.classList.remove(inputErrorClass);
       }
     });
   });

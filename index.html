@@ -37,13 +37,13 @@
         <button class="popup__close-button popup__close-button_var_edit service-buttons" type="button"></button>
         <h2 class="popup__heading">Редактировать профиль</h2>
         <form class="popup__item popup__item_var_edit" name="edit-profile" novalidate>
-          <input class="popup__field popup__field_el_name-area popup__field_type_error" id="name-input" type="text"
+          <input class="popup__field popup__field_el_name-area" id="name-input" type="text"
             name="input-name" placeholder="Имя" minlength="2" maxlength="40" required>
           <span class="popup__error popup__error_visible" id="name-input-error"></span>
-          <input class="popup__field popup__field_el_about-area popup__field_type_error" id="about-input" type="text"
+          <input class="popup__field popup__field_el_about-area" id="about-input" type="text"
             name="input-about" placeholder="О себе" minlength="2" maxlength="200" required>
           <span class="popup__error popup__error_visible" id="about-input-error"></span>
-          <button class="popup__submit-button popup__submit-button_valid" type="submit">Сохранить</button>
+          <button class="popup__submit-button popup__submit-button_valid popup_submit-button_var_edit" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -52,13 +52,13 @@
         <button class="popup__close-button popup__close-button_var_add service-buttons" type="button"></button>
         <h2 class="popup__heading">Новое место</h2>
         <form class="popup__item popup__item_var_add" name="add-pictures" novalidate>
-          <input class="popup__field popup__field_el_title-area popup__field_type_error" id="title-input" type="text"
+          <input class="popup__field popup__field_el_title-area" id="title-input" type="text"
             name="input-name" placeholder="Название" minlength="2" maxlength="30" required>
           <span class="popup__error popup__error_visible" id="title-input-error"></span>
-          <input class="popup__field popup__field_el_link-area popup__field_type_error" id="link-input" type="url"
+          <input class="popup__field popup__field_el_link-area" id="link-input" type="url"
             name="input-about" placeholder="Ссылка на картинку" required>
           <span class="popup__error popup__error_visible" id="link-input-error"></span>
-          <button class="popup__submit-button popup__submit-button_valid" type="submit">Сохранить</button>
+          <button class="popup__submit-button popup__submit-button_valid popup_submit-button_var_add" type="submit">Сохранить</button>
         </form>
       </div>
     </div>

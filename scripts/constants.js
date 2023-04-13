@@ -16,6 +16,7 @@ const popupAddOpenButtonEl = document.querySelector('.profile__add-button');
 const closeButtonsList = Array.from(document.querySelectorAll('.popup__close-button'));
 
 // Inputs
+const inputsList = document.querySelectorAll('.popup__field');
 const nameInput = document.querySelector('.popup__field_el_name-area');
 const aboutInput = document.querySelector('.popup__field_el_about-area');
 const titleInput = document.querySelector('.popup__field_el_title-area');
@@ -28,6 +29,10 @@ const formAddEl = document.querySelector('.popup__item_var_add');
 // Профиль инфо
 const profileNameEl = document.querySelector('.profile__name');
 const profileAboutEl = document.querySelector('.profile__bio');
+
+// Submit-кнопки попапов
+const popupAddButtonEl = document.querySelector('.popup_submit-button_var_add')
+const popupEditButtonEl = document.querySelector('.popup_submit-button_var_edit')
 
 // Контейнер попапа с изображением
 const popupPicContainer = document.querySelector('.popup__container_var_pictures');
