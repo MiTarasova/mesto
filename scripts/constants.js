@@ -16,7 +16,6 @@ const popupAddOpenButtonEl = document.querySelector('.profile__add-button');
 const closeButtonsList = Array.from(document.querySelectorAll('.popup__close-button'));
 
 // Inputs
-const inputsList = document.querySelectorAll('.popup__field');
 const nameInput = document.querySelector('.popup__field_el_name-area');
 const aboutInput = document.querySelector('.popup__field_el_about-area');
 const titleInput = document.querySelector('.popup__field_el_title-area');

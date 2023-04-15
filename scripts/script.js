@@ -12,8 +12,8 @@ const closePopup = function (popup) {
 
 // Функция закрытия попапов при клике на Escape
 function keyHandler(evt) {
-  const popup = document.querySelector('.popup_opened');
     if (evt.key === 'Escape') {
+      const popup = document.querySelector('.popup_opened');
       closePopup(popup);
     };
 };
@@ -56,8 +56,18 @@ formAddEl.addEventListener('submit', function (evt) {
 
   formAddEl.reset()   // Очистка значений инпутов формы
 
+  removeInputError(formAddEl); // Удаление ошибки инпутов (нижнее подчеркивание красной линией)
+
   closePopup(popupAddEl);
 });
+
+// Функция удаления класса ошибки в инпутах
+function removeInputError (form) {
+  const inputsFormList = form.querySelectorAll('.popup__field_type_error');
+  inputsFormList.forEach((input) => {
+    input.classList.remove('popup__field_type_error')
+  })
+}
 
 // Функция создания карточки
 function createCard(picTitleValue, picLinkValue) {
