@@ -1,6 +1,4 @@
 // Попапы
-const popupElement = document.querySelector('.popup');
-
 const popupEditEl = document.querySelector('.popup_var_edit');
 const popupAddEl = document.querySelector('.popup_var_add');
 const popupPictureEl = document.querySelector('.popup_var_pictures');
@@ -29,43 +27,53 @@ const formAddEl = document.querySelector('.popup__item_var_add');
 const profileNameEl = document.querySelector('.profile__name');
 const profileAboutEl = document.querySelector('.profile__bio');
 
-// Submit-кнопки попапов
-const popupAddButtonEl = document.querySelector('.popup__submit-button_var_add')
-const popupEditButtonEl = document.querySelector('.popup__submit-button_var_edit')
-
 // Контейнер попапа с изображением
-const popupPicContainer = document.querySelector('.popup__container_var_pictures');
-const popupImageEl = popupPicContainer.querySelector('.popup__image');
-const popupSubscribeEl = popupPicContainer.querySelector('.popup__subscribe');
+const popupImageEl = document.querySelector('.popup__image');
+const popupSubscribeEl = document.querySelector('.popup__subscribe');
 
 // Карточки
 const cardsContainer = document.querySelector('.cards');
-const cardTemplate = document.querySelector('.cards__template').content;
 
 // Массив объектов предустановленных карточек
 const initialCards = [
   {
-    name: 'Колокольная',
-    link: 'https://live.staticflickr.com/65535/52787095156_5304f0fe01_k.jpg'
+    title: 'Колокольная',
+    image: 'https://live.staticflickr.com/65535/52787095156_5304f0fe01_k.jpg'
   },
   {
-    name: 'Весна в городе',
-    link: 'https://live.staticflickr.com/65535/52787492130_7b662fa8f1_k.jpg'
+    title: 'Весна в городе',
+    image: 'https://live.staticflickr.com/65535/52787492130_7b662fa8f1_k.jpg'
   },
   {
-    name: 'Кукуруза',
-    link: 'https://live.staticflickr.com/65535/52787325274_b6c377601d_k.jpg'
+    title: 'Кукуруза',
+    image: 'https://live.staticflickr.com/65535/52787325274_b6c377601d_k.jpg'
   },
   {
-    name: 'Мосты соединяют',
-    link: 'https://live.staticflickr.com/65535/52787325344_b3efc68fc6_h.jpg'
+    title: 'Мосты соединяют',
+    image: 'https://live.staticflickr.com/65535/52787325344_b3efc68fc6_h.jpg'
   },
   {
-    name: 'Точка зрения',
-    link: 'https://live.staticflickr.com/65535/52787546168_a06b6c5d88_k.jpg'
+    title: 'Точка зрения',
+    image: 'https://live.staticflickr.com/65535/52787546168_a06b6c5d88_k.jpg'
   },
   {
-    name: 'Москва-Сити',
-    link: 'https://live.staticflickr.com/65535/52787325264_29b3bf9e43_k.jpg'
+    title: 'Москва-Сити',
+    image: 'https://live.staticflickr.com/65535/52787325264_29b3bf9e43_k.jpg'
   }
 ];
+
+const validationConfig = {
+  formSelector: '.popup__item',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_invalid',
+  activeButtonClass: 'popup__submit-button_valid',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__error_visible'
+};
+
+export { popupEditEl, popupAddEl, popupPictureEl, popupList,
+  popupEditOpenButtonEl, popupAddOpenButtonEl, closeButtonsList, nameInput,
+  aboutInput, titleInput, linkInput, formEditEl, formAddEl, profileNameEl,
+  profileAboutEl, popupImageEl, popupSubscribeEl, cardsContainer,
+  initialCards, validationConfig }

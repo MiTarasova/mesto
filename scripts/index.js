@@ -1,3 +1,37 @@
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js"
+import {
+  popupEditEl, popupAddEl, popupList,
+  popupEditOpenButtonEl, popupAddOpenButtonEl, closeButtonsList, nameInput,
+  aboutInput, titleInput, linkInput, formEditEl, formAddEl, profileNameEl,
+  profileAboutEl, initialCards, cardsContainer, validationConfig
+} from "./constants.js"
+
+// Экземпляр класса валидации для формы попапа Edit
+const formEditValidator = new FormValidator(validationConfig, formEditEl);
+formEditValidator.enableValidation()
+
+// Экземпляр класса валидации для формы попапа Add
+const formAddValidator = new FormValidator(validationConfig, formAddEl)
+formAddValidator.enableValidation()
+
+// Создание экземпляра карточки
+function renderCard(item) {
+  const card = new Card(item, '.cards__template');
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+// Добавление карточки в разметку
+function addCard(element) {
+  cardsContainer.prepend(renderCard(element))
+}
+
+// Предустановленные карточки
+initialCards.forEach((item) => {
+  addCard(item)
+});
+
 // Функция открытия попапов (добавление класса)
 const openPopup = function (popup) {
   popup.classList.add('popup_opened');
@@ -12,16 +46,19 @@ const closePopup = function (popup) {
 
 // Функция закрытия попапов при клике на Escape
 function keyHandler(evt) {
-    if (evt.key === 'Escape') {
-      const popup = document.querySelector('.popup_opened');
-      closePopup(popup);
-    };
+  if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  };
 };
 
 // Открытие попапа "Редактирование профиля" по клику на edit
 popupEditOpenButtonEl.addEventListener('click', function () {
   openPopup(popupEditEl);
-  disableButton(popupEditButtonEl, validationConfig)
+
+  // Сброс кнопки при открытии попапа
+  formEditValidator.resetButtonForOpen()
+
   // Подстановка значений из профиля
   nameInput.value = profileNameEl.textContent;
   aboutInput.value = profileAboutEl.textContent;
@@ -30,7 +67,9 @@ popupEditOpenButtonEl.addEventListener('click', function () {
 // Открытие попапа "Добавление фото" по клику на add
 popupAddOpenButtonEl.addEventListener('click', function () {
   openPopup(popupAddEl);
-  disableButton(popupAddButtonEl, validationConfig);
+
+  // Сброс кнопки при открытии попапа
+  formAddValidator.resetButtonForOpen()
 });
 
 // Обработчик «отправки» формы Edit-попапа
@@ -51,10 +90,9 @@ formEditEl.addEventListener('submit', handleEditFormSubmit);
 formAddEl.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
-  // Вызов функции с передачей параметров значений
-  cardsContainer.prepend(createCard(titleInput.value, linkInput.value));
+  addCard({ image: linkInput.value, title: titleInput.value })
 
-  formAddEl.reset()   // Очистка значений инпутов формы
+  formAddEl.reset() // Очистка значений инпутов формы
 
   removeInputError(formAddEl); // Удаление ошибки инпутов (нижнее подчеркивание красной линией)
 
@@ -62,52 +100,11 @@ formAddEl.addEventListener('submit', function (evt) {
 });
 
 // Функция удаления класса ошибки в инпутах
-function removeInputError (form) {
+function removeInputError(form) {
   const inputsFormList = form.querySelectorAll('.popup__field_type_error');
   inputsFormList.forEach((input) => {
     input.classList.remove('popup__field_type_error')
   })
-}
-
-// Функция создания карточки
-function createCard(picTitleValue, picLinkValue) {
-  // Клонирование всего содержимого li
-  const cardElement = cardTemplate.querySelector('.cards__item').cloneNode(true);
-
-  // Подставление передаваемых значений
-  cardElement.querySelector('.cards__title').textContent = picTitleValue;
-  cardElement.querySelector('.cards__image').src = picLinkValue;
-  cardElement.querySelector('.cards__image').alt = picTitleValue;
-
-  // Функция активного "лайка" (добавление)
-  cardElement.querySelector('.cards__like-button').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('cards__like-button_active');
-  });
-
-  // Удаление карточки по клику на "мусорку"
-  cardElement.querySelector('.cards__reset-button').addEventListener('click', function (evt) {
-    evt.target.closest('.cards__item').remove();
-  });
-
-  // Функция открытия попапа с изображением
-  cardElement.querySelector('.cards__image').addEventListener('click', function () {
-    openPopup(popupPictureEl);
-    createPicturePopup(picLinkValue, picTitleValue);
-  });
-
-  return cardElement;
-};
-
-// Предустановленные карточки
-initialCards.forEach(card => {
-  cardsContainer.prepend(createCard(card.name, card.link));
-});
-
-// Функция создания попапа с изображением
-function createPicturePopup(image, subscribe) {
-  popupImageEl.src = image;
-  popupImageEl.alt = subscribe;
-  popupSubscribeEl.textContent = subscribe;
 }
 
 // Функция закрытия попапов по клику на крестик
@@ -129,3 +126,5 @@ function closePopupByOverlay(evt) {
 popupList.forEach(element => {
   element.addEventListener('click', closePopupByOverlay)
 });
+
+export { openPopup }
