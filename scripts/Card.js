@@ -1,11 +1,9 @@
-import { openPopup } from "./index.js"
-import { popupPictureEl, popupImageEl, popupSubscribeEl } from "./constants.js"
-
 class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._image = data.image;
     this._title = data.title;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   // Клонирование темплейта
@@ -22,20 +20,21 @@ class Card {
   // Создание карточки
   generateCard() {
     this._card = this._getTemplate();
+    this._cardImage = this._card.querySelector('.cards__image');
+    this._likeButton = this._card.querySelector('.cards__like-button');
+
     this._setEventListeners(); // Вызов слушателя событий
 
-    this._card.querySelector('.cards__image').src = this._image;
-    this._card.querySelector('.cards__image').alt = this._title;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._title;
     this._card.querySelector('.cards__title').textContent = this._title;
 
     return this._card;
   }
 
   // Функционал "лайка"
-  _like() {
-    this._card
-      .querySelector('.cards__like-button')
-      .classList.toggle('cards__like-button_active');
+  _toggleLike() {
+    this._likeButton.classList.toggle('cards__like-button_active');
   }
 
   // Удаление карточки по клику на "мусорку"
@@ -43,23 +42,13 @@ class Card {
     this._card.remove()
   }
 
-  // Обработчик открытия попапа
-  _handleOpenPopup() {
-    popupImageEl.src = this._image;
-    popupImageEl.alt = this._title;
-    popupSubscribeEl.textContent = this._title;
-
-    openPopup(popupPictureEl)
-  }
-
   // Обработчик закрытия попапа универсальный => в index.js
 
   // Слушатель клика по карточке
   _setEventListeners() {
-    this._card
-      .querySelector('.cards__like-button')
+    this._likeButton
       .addEventListener('click', () => {
-        this._like()
+        this._toggleLike()
       });
 
     this._card
@@ -68,11 +57,10 @@ class Card {
         this._removeCard()
       });
 
-    this._card
-      .querySelector('.cards__image')
+    this._cardImage
       .addEventListener('click', () => {
-        this._handleOpenPopup()
-      })
+        this._handleCardClick(this._image, this._title)
+      });
   }
 };
 

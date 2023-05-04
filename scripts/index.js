@@ -1,11 +1,18 @@
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js"
 import {
-  popupEditEl, popupAddEl, popupList,
-  popupEditOpenButtonEl, popupAddOpenButtonEl, closeButtonsList, nameInput,
-  aboutInput, titleInput, linkInput, formEditEl, formAddEl, profileNameEl,
-  profileAboutEl, initialCards, cardsContainer, validationConfig
+  popupEditEl, popupAddEl, popupList, popupEditOpenButtonEl, popupAddOpenButtonEl,
+  closeButtonsList, nameInput, aboutInput, titleInput, linkInput, formEditEl,
+  formAddEl, profileNameEl, profileAboutEl, initialCards, cardsContainer,
+  validationConfig, popupImageEl, popupSubscribeEl, popupPictureEl
 } from "./constants.js"
+
+function handleCardClick(image, title) {
+  popupImageEl.src = image;
+  popupImageEl.alt = title;
+  popupSubscribeEl.textContent = title;
+  openPopup(popupPictureEl)
+}
 
 // Экземпляр класса валидации для формы попапа Edit
 const formEditValidator = new FormValidator(validationConfig, formEditEl);
@@ -17,7 +24,7 @@ formAddValidator.enableValidation()
 
 // Создание экземпляра карточки
 function renderCard(item) {
-  const card = new Card(item, '.cards__template');
+  const card = new Card(item, '.cards__template', handleCardClick);
   const cardElement = card.generateCard();
   return cardElement
 }
@@ -28,9 +35,7 @@ function addCard(element) {
 }
 
 // Предустановленные карточки
-initialCards.forEach((item) => {
-  addCard(item)
-});
+initialCards.forEach(addCard);
 
 // Функция открытия попапов (добавление класса)
 const openPopup = function (popup) {
@@ -56,8 +61,8 @@ function keyHandler(evt) {
 popupEditOpenButtonEl.addEventListener('click', function () {
   openPopup(popupEditEl);
 
-  // Сброс кнопки при открытии попапа
-  formEditValidator.resetButtonForOpen()
+  // Сброс кнопки и ошибок инпутов при открытии попапа
+  formEditValidator.resetValidation()
 
   // Подстановка значений из профиля
   nameInput.value = profileNameEl.textContent;
@@ -68,8 +73,10 @@ popupEditOpenButtonEl.addEventListener('click', function () {
 popupAddOpenButtonEl.addEventListener('click', function () {
   openPopup(popupAddEl);
 
-  // Сброс кнопки при открытии попапа
-  formAddValidator.resetButtonForOpen()
+  formAddEl.reset() // Очистка значений инпутов формы
+
+  // Сброс кнопки и ошибок инпутов при открытии попапа
+  formAddValidator.resetValidation()
 });
 
 // Обработчик «отправки» формы Edit-попапа
@@ -92,39 +99,17 @@ formAddEl.addEventListener('submit', function (evt) {
 
   addCard({ image: linkInput.value, title: titleInput.value })
 
-  formAddEl.reset() // Очистка значений инпутов формы
-
-  removeInputError(formAddEl); // Удаление ошибки инпутов (нижнее подчеркивание красной линией)
-
   closePopup(popupAddEl);
 });
 
-// Функция удаления класса ошибки в инпутах
-function removeInputError(form) {
-  const inputsFormList = form.querySelectorAll('.popup__field_type_error');
-  inputsFormList.forEach((input) => {
-    input.classList.remove('popup__field_type_error')
+// Универсальная функция закрытия попапов по клику на крестик и оверлей
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      closePopup(popup)
+    }
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup)
+    }
   })
-}
-
-// Функция закрытия попапов по клику на крестик
-closeButtonsList.forEach(button => {
-  // определяем ближайший попап к элементу кнопки
-  const popup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(popup));
 })
-
-// Функция закрытия попапов по клику на оверлей
-function closePopupByOverlay(evt) {
-  // условие выполняется, если эл-т, который вызвал событие равен эл-ту, на который применен обработчик
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.currentTarget);
-  };
-};
-
-// Обработчик закрытия попапа при клике на overlay для каждого попапа
-popupList.forEach(element => {
-  element.addEventListener('click', closePopupByOverlay)
-});
-
-export { openPopup }

@@ -10,6 +10,8 @@ class FormValidator {
     this._form = form
 
     this._formInputs = Array.from(form.querySelectorAll(this._inputSelector)); // найти все формы, используя inputSelector
+    this._input = form.querySelector(this._inputSelector)
+    this._inputErrorContainer = form.querySelector(`#${this._input.id}-error`)
     this._button = form.querySelector(this._submitButtonSelector)
   }
 
@@ -29,13 +31,10 @@ class FormValidator {
   }
 
   _checkInputValidity() {
-    this._input = this._form.querySelector(this._inputSelector)
-    const inputErrorContainer = this._form.querySelector(`#${this._input.id}-error`)
-
     if (this._input.checkValidity()) { //true / false
-      inputErrorContainer.textContent = '' // Оставляем пустое поле, если проходит валидацию
+      this._inputErrorContainer.textContent = '' // Оставляем пустое поле, если проходит валидацию
     } else {
-      inputErrorContainer.textContent = this._input.validationMessage // Выводим ошибку, если не проходит валидацию
+      this._inputErrorContainer.textContent = this._input.validationMessage // Выводим ошибку, если не проходит валидацию
     }
   }
 
@@ -51,12 +50,23 @@ class FormValidator {
     this._button.setAttribute('disabled',true) // Добавляем атрибут
   }
 
-  _hasInvalidInput() {
-    return this._formInputs.some((item) => !item.validity.valid) // Есть ли какое-то поле в форме, отвечающее требованию – невалидное (true/false)
+  resetValidation() {
+    this._disableButton();
+
+    this._formInputs.forEach((inputElement) => {
+      this._hideError(inputElement)
+    });
   }
 
-  resetButtonForOpen() {
-    this._disableButton()
+  _hideError() {
+    this._formInputs.forEach((input) => {
+      input.classList.remove('popup__field_type_error') // Сброс ошибки инпутов
+    });
+    this._inputErrorContainer.textContent = '' // Обнуление текста ошибки валидации
+  }
+
+  _hasInvalidInput() {
+    return this._formInputs.some((item) => !item.validity.valid) // Есть ли какое-то поле в форме, отвечающее требованию – невалидное (true/false)
   }
 
   enableValidation() {
