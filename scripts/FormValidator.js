@@ -10,8 +10,6 @@ class FormValidator {
     this._form = form
 
     this._formInputs = Array.from(form.querySelectorAll(this._inputSelector)); // найти все формы, используя inputSelector
-    this._input = form.querySelector(this._inputSelector)
-    this._inputErrorContainer = form.querySelector(`#${this._input.id}-error`)
     this._button = form.querySelector(this._submitButtonSelector)
   }
 
@@ -30,12 +28,18 @@ class FormValidator {
     });
   }
 
-  _checkInputValidity() {
-    if (this._input.checkValidity()) { //true / false
-      this._inputErrorContainer.textContent = '' // Оставляем пустое поле, если проходит валидацию
+  _checkInputValidity(input) {
+    const errorContainer  = this._getErrorContainerByInputId(input.id)
+
+    if (input.checkValidity()) { //true / false
+      errorContainer.textContent = '' // Оставляем пустое поле, если проходит валидацию
     } else {
-      this._inputErrorContainer.textContent = this._input.validationMessage // Выводим ошибку, если не проходит валидацию
+      errorContainer.textContent = input.validationMessage // Выводим ошибку, если не проходит валидацию
     }
+  }
+
+  _getErrorContainerByInputId(id) {
+    return this._form.querySelector(`#${id}-error`)
   }
 
   _enableButton() {
@@ -58,11 +62,12 @@ class FormValidator {
     });
   }
 
-  _hideError() {
+  _hideError(input) {
     this._formInputs.forEach((input) => {
-      input.classList.remove('popup__field_type_error') // Сброс ошибки инпутов
+      input.classList.remove(this._inputErrorClass) // Сброс ошибки инпутов
     });
-    this._inputErrorContainer.textContent = '' // Обнуление текста ошибки валидации
+    const errorContainer = this._getErrorContainerByInputId(input.id)
+    errorContainer.textContent = '' // Обнуление текста ошибки валидации
   }
 
   _hasInvalidInput() {
