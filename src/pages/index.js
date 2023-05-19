@@ -1,9 +1,9 @@
-import Card from "./scripts/components/Card.js";
-import FormValidator from "./scripts/components/FormValidator.js";
-import Section from "./scripts/components/Section.js";
-import PopupWithImage from "./scripts/components/PopupWithImage.js";
-import PopupWithForm from "./scripts/components/PopupWithForm.js";
-import UserInfo from "./scripts/components/UserInfo.js";
+import Card from "../scripts/components/Card.js";
+import FormValidator from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 import {
   popupEditEl,
   popupAddEl,
@@ -18,7 +18,8 @@ import {
   initialCards,
   validationConfig,
   popupPictureEl,
-} from "./scripts/utils/constants.js";
+} from "../scripts/utils/constants.js";
+import './index.css'
 
 const userInfo = new UserInfo({
   userName: profileNameEl,
@@ -36,6 +37,7 @@ const popupEditObj = new PopupWithForm(popupEditEl, (item) => {
 const popupAddObj = new PopupWithForm(popupAddEl, () => {
   renderCard({ image: linkInput.value, title: titleInput.value });
   popupAddObj.close();
+  popupAddObj.reset();
 });
 
 const popupImageObj = new PopupWithImage(popupPictureEl);
@@ -63,10 +65,9 @@ popupEditOpenButtonEl.addEventListener("click", () => {
   popupEditObj.open();
   // Сброс кнопки и ошибок инпутов при открытии попапа
   formEditValidator.resetValidation();
-  const userData = userInfo.getUserInfo()
+  const userData = userInfo.getUserInfo();
   // Подстановка значений из профиля
   popupEditObj.setInputValues(userData);
-  console.log(userData);
 });
 
 // Открытие попапа "Добавление фото" по клику на add

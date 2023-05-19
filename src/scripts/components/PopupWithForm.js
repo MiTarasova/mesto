@@ -21,20 +21,29 @@ export default class PopupWithForm extends Popup {
   setInputValues(data) {
     this._inputList.forEach((input) => {
       input.value = data[input.name];
-      console.log(data[input.name]);
     });
   }
 
+  // Обработчик сабмита
+  _handleSubmit = (evt) => {
+    evt.preventDefault();
+    this._submitFunction(this._getInputValues());
+  };
+
+  // Установка слушателя на сабмит
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      this._submitFunction(this._getInputValues());
-    });
+    this._form.addEventListener("submit", this._handleSubmit);
   }
 
-  close() {
-    super.close();
+  // Метод для снятия слушателей
+  _unsetEventListeners() {
+    super._unsetEventListeners();
+    this._form.removeEventListener("submit", this._handleSubmit);
+  }
+
+  // Сброс значений инпутов формы
+  reset() {
     this._form.reset();
   }
 }
