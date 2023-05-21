@@ -29,23 +29,18 @@ export default class FormValidator {
         if (this._hasInvalidInput()) {
           // Если есть невалидное поле, деактивровать кнопку
           this._disableButton();
-          input.classList.add(this._inputErrorClass);
         } else {
           this._enableButton(); // Если все ок, сделать активной
-          input.classList.remove(this._inputErrorClass);
         }
       });
     });
   }
 
   _checkInputValidity(input) {
-    const errorContainer = this._getErrorContainerByInputId(input.id);
-
     if (input.checkValidity()) {
-      //true / false
-      errorContainer.textContent = ""; // Оставляем пустое поле, если проходит валидацию
+      this._hideInputError(input);
     } else {
-      errorContainer.textContent = input.validationMessage; // Выводим ошибку, если не проходит валидацию
+      this._showInputError(input);
     }
   }
 
@@ -67,17 +62,20 @@ export default class FormValidator {
 
   resetValidation() {
     this._disableButton();
-
     this._formInputs.forEach((inputElement) => {
-      this._hideError(inputElement);
+      this._hideInputError(inputElement);
     });
   }
 
-  _hideError(input) {
-    this._formInputs.forEach((input) => {
-      input.classList.remove(this._inputErrorClass); // Сброс ошибки инпутов
-    });
+  _showInputError(input) {
     const errorContainer = this._getErrorContainerByInputId(input.id);
+    input.classList.add(this._inputErrorClass);
+    errorContainer.textContent = input.validationMessage;
+  }
+
+  _hideInputError(input) {
+    const errorContainer = this._getErrorContainerByInputId(input.id);
+    input.classList.remove(this._inputErrorClass); // Сброс ошибки инпутов
     errorContainer.textContent = ""; // Обнуление текста ошибки валидации
   }
 

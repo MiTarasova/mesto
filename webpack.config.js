@@ -20,7 +20,17 @@ module.exports = {
       {
         test: /\.(svg|jpe?g)$/i,
         type: "asset/resource",
+        generator: {
+          filename: "images/[name].[hash][ext]",
+        },
       },
+      {
+        test: /\.(woff|woff2)$/i,
+        type: 'asset/resource',
+        generator: {
+            filename: 'fonts/[name].[hash][ext]',
+        }
+   },
       {
         test: /\.css$/i,
         use: [

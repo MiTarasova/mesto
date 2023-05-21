@@ -10,11 +10,11 @@ export default class PopupWithForm extends Popup {
 
   // Метод, собирающий данные всех инпутов формы
   _getInputValues() {
-    this._values = {};
+    const values = {};
     this._inputList.forEach((input) => {
-      this._values[input.name] = input.value;
+      values[input.name] = input.value;
     });
-    return this._values;
+    return values;
   }
 
   // Метод, устанавливающий значение инпутов
@@ -28,6 +28,7 @@ export default class PopupWithForm extends Popup {
   _handleSubmit = (evt) => {
     evt.preventDefault();
     this._submitFunction(this._getInputValues());
+    this.close();
   };
 
   // Установка слушателя на сабмит
@@ -42,8 +43,9 @@ export default class PopupWithForm extends Popup {
     this._form.removeEventListener("submit", this._handleSubmit);
   }
 
-  // Сброс значений инпутов формы
-  reset() {
+  close() {
+    super.close();
+    // Сброс значений инпутов формы
     this._form.reset();
   }
 }

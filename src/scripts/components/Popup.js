@@ -1,6 +1,6 @@
 export default class Popup {
   constructor(popupSelector) {
-    this._popup = popupSelector;
+    this._popup = document.querySelector(popupSelector);
   }
 
   // Открытие попапа
@@ -12,15 +12,15 @@ export default class Popup {
   // Закрытие попапа
   close() {
     this._popup.classList.remove("popup_opened");
-    this._unsetEventListeners();
+    this._removeEventListeners();
   }
 
   // Обработчик закрытия попапа по клику на крестик и оверлей
   _handleCloseByClick = (evt) => {
-    if (evt.target.classList.contains("popup_opened")) {
-      this.close();
-    }
-    if (evt.target.classList.contains("popup__close-button")) {
+    if (
+      evt.target.classList.contains("popup_opened") ||
+      evt.target.classList.contains("popup__close-button")
+    ) {
       this.close();
     }
   };
@@ -39,7 +39,7 @@ export default class Popup {
   }
 
   // Метод для снятия слушателей
-  _unsetEventListeners() {
+  _removeEventListeners() {
     this._popup.removeEventListener("mousedown", this._handleCloseByClick);
     document.removeEventListener("keydown", this._handleEscClose);
   }

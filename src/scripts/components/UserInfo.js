@@ -1,17 +1,16 @@
 export default class UserInfo {
   constructor({ userName, userAbout }) {
-    this._userName = userName;
-    this._userAbout = userAbout;
+    this._userName = document.querySelector(userName);
+    this._userAbout = document.querySelector(userAbout);
   }
 
   // Метод, возвращающий объект для подставления информации
   // о пользователе в форму попапа при открытии
   getUserInfo() {
-    const userInfoData = {
+    return {
       name: this._userName.innerText,
       about: this._userAbout.innerText,
     };
-    return userInfoData;
   }
 
   // Метод, подставляющий новые данные на страницу

@@ -1,8 +1,3 @@
-// Попапы
-const popupEditEl = document.querySelector(".popup_var_edit");
-const popupAddEl = document.querySelector(".popup_var_add");
-const popupPictureEl = document.querySelector(".popup_var_pictures");
-
 // Кнопки открытия попапов
 const popupEditOpenButtonEl = document.querySelector(".profile__edit-button");
 const popupAddOpenButtonEl = document.querySelector(".profile__add-button");
@@ -17,12 +12,8 @@ const titleInput = document.querySelector(".popup__field_el_title-area");
 const linkInput = document.querySelector(".popup__field_el_link-area");
 
 // Формы попапов
-const formEditEl = popupEditEl.querySelector(".popup__item_var_edit");
+const formEditEl = document.querySelector(".popup__item_var_edit");
 const formAddEl = document.querySelector(".popup__item_var_add");
-
-// Профиль инфо
-const profileNameEl = document.querySelector(".profile__name");
-const profileAboutEl = document.querySelector(".profile__bio");
 
 // Массив объектов предустановленных карточек
 const initialCards = [
@@ -63,9 +54,6 @@ const validationConfig = {
 };
 
 export {
-  popupEditEl,
-  popupAddEl,
-  popupPictureEl,
   popupEditOpenButtonEl,
   popupAddOpenButtonEl,
   closeButtonsList,
@@ -73,8 +61,6 @@ export {
   linkInput,
   formEditEl,
   formAddEl,
-  profileNameEl,
-  profileAboutEl,
   initialCards,
   validationConfig,
 };

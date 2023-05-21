@@ -5,42 +5,34 @@ import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import {
-  popupEditEl,
-  popupAddEl,
   popupEditOpenButtonEl,
   popupAddOpenButtonEl,
   titleInput,
   linkInput,
   formEditEl,
   formAddEl,
-  profileNameEl,
-  profileAboutEl,
   initialCards,
   validationConfig,
-  popupPictureEl,
 } from "../scripts/utils/constants.js";
-import './index.css'
+import "./index.css";
 
 const userInfo = new UserInfo({
-  userName: profileNameEl,
-  userAbout: profileAboutEl,
+  userName: ".profile__name",
+  userAbout: ".profile__bio",
 });
 
 // Экземпляр класса попапа с формой для "Редактирование профиля"
-const popupEditObj = new PopupWithForm(popupEditEl, (item) => {
+const popupEditObj = new PopupWithForm(".popup_var_edit", (item) => {
   // Подстановка новых значений инпутов
   userInfo.setUserInfo(item);
-  popupEditObj.close();
 });
 
 // Экземпляр класса попапа с формой для "Новое место"
-const popupAddObj = new PopupWithForm(popupAddEl, () => {
+const popupAddObj = new PopupWithForm(".popup_var_add", () => {
   renderCard({ image: linkInput.value, title: titleInput.value });
-  popupAddObj.close();
-  popupAddObj.reset();
 });
 
-const popupImageObj = new PopupWithImage(popupPictureEl);
+const popupImageObj = new PopupWithImage(".popup_var_pictures");
 
 // Создание новой секции для карточек
 const cardList = new Section(
