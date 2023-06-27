@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
     this._submitFunction = submitFunction;
     this._form = this._popup.querySelector(".popup__item");
     this._inputList = Array.from(this._form.querySelectorAll(".popup__field"));
+    this._submitButton = this._popup.querySelector(".popup__submit-button");
+    this._defaultButton = this._submitButton.textContent;
   }
 
   // Метод, собирающий данные всех инпутов формы
@@ -28,13 +30,21 @@ export default class PopupWithForm extends Popup {
   _handleSubmit = (evt) => {
     evt.preventDefault();
     this._submitFunction(this._getInputValues());
-    this.close();
+    this._setLoadingButtonSave();
   };
 
   // Установка слушателя на сабмит
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", this._handleSubmit);
+  }
+
+  _setLoadingButtonSave() {
+    this._submitButton.textContent = "Сохранение...";
+  }
+
+  setDefaultButton() {
+    this._submitButton.textContent = this._defaultButton;
   }
 
   // Метод для снятия слушателей

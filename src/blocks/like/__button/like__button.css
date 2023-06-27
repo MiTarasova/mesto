@@ -1,7 +1,6 @@
-.cards__like-button {
+.like__button {
   width: 22px;
   height: 19px;
-  margin: 0 20px 0 0;
   padding: 0;
   border: none;
   background-color: transparent;
@@ -9,10 +8,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: auto;
-  justify-self: flex-end;
 }
 
-.cards__like-button:hover {
+.like__button:hover {
   opacity: 50%;
   cursor: pointer;
 }
