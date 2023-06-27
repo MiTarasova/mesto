@@ -6,8 +6,8 @@ export default class Section {
   }
 
   // Метод, отвечающий за отрисовку всех элементов
-  renderItems() {
-    this._renderedItems.forEach(this._renderer);
+  renderItems(items) {
+    items.reverse().forEach(this._renderer);
   }
 
   // Метод, принимающий DOM-элемент и вставляющий его в контейнер

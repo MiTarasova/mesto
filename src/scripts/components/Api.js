@@ -5,7 +5,7 @@ class Api {
     this._authorization = data.headers.authorization;
   }
 
-  _result(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
@@ -19,11 +19,7 @@ class Api {
       headers: {
         authorization: this._authorization,
       },
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // добавление новой карточки на сервер
@@ -35,25 +31,17 @@ class Api {
         name: data.name,
         link: data.link,
       }),
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // удаление карточки с сервера
   deleteCard = (id) => {
-    return fetch("https://mesto.nomoreparties.co/v1/cohort-69/cards/" + id, {
+    return fetch(this._baseURL + "/cards/" + id, {
       headers: {
-        authorization: "5b16b2c2-99fd-48b9-8c43-10ad543e77bf",
+        authorization: this._authorization,
       },
       method: "DELETE",
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   };
 
   // получение данных пользователя с сервера
@@ -62,11 +50,7 @@ class Api {
       headers: {
         authorization: this._authorization,
       },
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // сохранение данных профиля на сервере
@@ -78,11 +62,7 @@ class Api {
         name: data.name,
         about: data.about,
       }),
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // сохранение аватара на сервере
@@ -93,11 +73,7 @@ class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   }
 
   // лайк
@@ -107,11 +83,7 @@ class Api {
         authorization: this._authorization,
       },
       method: "PUT",
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   };
 
   // удаление лайка
@@ -121,11 +93,7 @@ class Api {
         authorization: this._authorization,
       },
       method: "DELETE",
-    })
-      .then(this._result)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkResponse);
   };
 }
 

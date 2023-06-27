@@ -1,6 +1,6 @@
 export default class Card {
   constructor(
-    { data, handleCardClick, handleCardDelete, handleCardLike, userId },
+    { data, handleCardClick, handleCardDelete, handleCardLike },
     templateSelector
   ) {
     this._link = data.link;
@@ -8,11 +8,11 @@ export default class Card {
     this._id = data._id;
     this._likes = data.likes;
     this._owner = data.owner;
+    this._userId = data._userId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
     this._handleCardLike = handleCardLike;
-    this._userId = userId;
   }
 
   // Клонирование темплейта
